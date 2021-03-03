@@ -22,7 +22,7 @@ func _d() string {
 		// HH-mm-ss
 		return time.Now().Format("15-04-05")
 	case 5:
-		// yyyy_MM_DD
+		// yyyy_MM_dd
 		return time.Now().Format("2006_01_02")
 	case 6:
 		// HH_mm_ss
