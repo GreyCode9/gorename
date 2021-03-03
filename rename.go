@@ -33,9 +33,10 @@ func main() {
 func rename()  {
 	result:=map[string]string{
 	}
-	fmt.Printf("输入的文件夹：%s",filePath)
+	fmt.Printf("处理路径：%s \n",filePath)
 	// 获取文件夹下所有文件列表
 	files, _ := ioutil.ReadDir(filePath)
+
 	var incr int64
 	for _, f := range files {
 		fileName:=f.Name()
@@ -49,6 +50,7 @@ func rename()  {
 			}
 		}
 	}
+	fmt.Printf("处理完成，共处理数量：%d \n",incr)
 	
 	// test
 	for k,v := range result {
