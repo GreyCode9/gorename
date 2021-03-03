@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"strconv"
 	"strings"
 )
 
@@ -42,9 +43,11 @@ func rename()  {
 		fileName:=f.Name()
 		if _h(fileName) {
 			if _fold(fileName) {
-				newName:=_format(fileName, incr)
-				newName=newName+getExtName(fileName)
-				result[fileName]=newName
+				newName := _format(fileName, incr)
+				ext := getExtName(fileName)
+				//extNewName := newName+ext
+				extNewName := checkName(newName,ext,0)
+				result[fileName]=extNewName
 				//fmt.Println(incr)
 				incr++
 			}
@@ -70,4 +73,17 @@ func getExtName(fileName string) string{
 		}
 	}
 	return ""
+}
+
+/*
+	如果名字冲突，尾部拼接自增数字返回新名字
+*/
+func checkName(fn string,ext string,incr int64) string {
+	fp:=filePath+"/"+fn+ext
+	if isExist(fp) {
+		fn=fn+"-"+strconv.FormatInt(incr,10)
+		incr++
+		checkName(fn,ext,incr)
+	}
+	return fn
 }
