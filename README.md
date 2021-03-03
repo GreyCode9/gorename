@@ -7,12 +7,14 @@
 程序会处理该路径下的文件或文件夹
 
 > 示例：
-> for linux：
-> 	-f /home/user
+> 
+> for linux:
+>  
+>    -f /home/user
 >
 > for windows:
 >
-> ​	-f D:\
+>   -f D:\
 
 ## -s
 
