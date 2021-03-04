@@ -57,7 +57,7 @@ func rename()  {
 	files, _ := ioutil.ReadDir(filePath)
 
 	var incr int64
-	confirm()
+	confirmFlag:=false
 	for _, f := range files {
 		fileName:=f.Name()
 		if _h(fileName) {
@@ -65,6 +65,11 @@ func rename()  {
 				newName := _format(fileName, incr)
 				ext := getExtName(fileName)
 				extNewName := checkName(newName,ext,0,true)
+				fmt.Printf("格式示范：%s  ==>  %s \n",fileName,extNewName)
+				if !confirmFlag {
+					confirm()
+					confirmFlag=true
+				}
 				result[fileName]=extNewName
 				err:=os.Rename(filePath+"/"+fileName,filePath+"/"+extNewName)
 				if err!=nil {
