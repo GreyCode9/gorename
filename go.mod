@@ -1,3 +1,3 @@
-module rename-util
+module gorename
 
 go 1.14

@@ -1,5 +1,5 @@
 
-<h1 align="center">rename-util</h1>
+<h1 align="center">gorename</h1>
 <p align=center>批量格式化命名工具</p>
 <div align=center>
     <img src="https://img.shields.io/badge/version->=1.14.6-red?logo=go&color=00ADD8&style=flat"/>
