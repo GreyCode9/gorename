@@ -47,6 +47,13 @@ func _format(fileName string,incr int64) string {
 				}
 			}
 			break
+		case "o":
+			if *o {
+				formatName=append(formatName, fileName)
+				if *s!="" {
+					formatName=append(formatName, *s)
+				}
+			}
 		default:
 			panic("请输入正确的 -format 格式参数")
 		}
