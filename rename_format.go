@@ -38,8 +38,8 @@ func _format(fileName string,incr int64) string {
 				}
 			}
 			break
-		case "a":
-			if *a {
+		case "A":
+			if *A {
 				autoA:=strconv.FormatInt(incr,10)
 				formatName=append(formatName, autoA)
 				if *s!="" {
@@ -47,8 +47,8 @@ func _format(fileName string,incr int64) string {
 				}
 			}
 			break
-		case "o":
-			if *o {
+		case "O":
+			if *O {
 				formatName=append(formatName, getName(fileName))
 				if *s!="" {
 					formatName=append(formatName, *s)

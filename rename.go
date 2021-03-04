@@ -13,12 +13,14 @@ var f = flag.String("f",".","文件夹路径，默认当前文件夹")
 var s = flag.String("s","","分隔符 例如： a_b_c.jpg  '_'就是分隔符")
 var p = flag.String("p","","自定义固定内容")
 var m = flag.String("m","","文件元数据\ns 使用文件大小\nmt 使用文件最后修改时间")
-var d = flag.Int("d",0,"使用当前时间的格式\n1 使用时间格式yyyy-mm-dd_HH-MM-ss\n2 使用时间格式yyyy_mm_dd")
-var a = flag.Bool("a",false,"开启使用自增数字")
+var format = flag.String("format","O,p,m,d,A","参数组合格式,用逗号分割\n例如：O,p,m,d,A")
+
 var F = flag.Bool("F",false,"重命名文件夹")
-var format = flag.String("format","o,p,m,d,a","参数组合格式,用逗号分割\n例如：o,p,m,d,a")
-var h = flag.Bool("h",false,"开启重命名'.'开头的文件")
-var o = flag.Bool("o",false,"开启插入文件原命名")
+var A = flag.Bool("A",false,"开启使用自增数字")
+var H = flag.Bool("H",false,"开启重命名'.'开头的文件")
+var O = flag.Bool("O",false,"开启插入文件原命名")
+
+var d = flag.Int("d",0,"使用当前时间的格式\n1 使用时间格式yyyy-mm-dd_HH-MM-ss\n2 使用时间格式yyyy_mm_dd")
 
 func main() {
 	flag.Parse()
@@ -82,14 +84,24 @@ func getExtName(fileName string) string{
 	获取文件名（不带拓展名）
 */
 func getName(fileName string) string{
-	name:=strings.Split(fileName,".")
-	if len(name)>=2 {
-		name[len(name)-1]=""
-		result:=strings.Join(name,".")
-		result=trimLastChar(result)
+	names:=strings.Split(fileName,".")
+	if len(names)>=2 {
+		if names[0]=="" {
+			// 是'.'开头的文件
+			if len(names)>=3 {
+				names[len(names)-1]=""
+			}
+			names[0]="."
+		}else {
+			names[len(names)-1]=""
+		}
+		result:=strings.Join(names,".")
+		if !isPointEnd(fileName) {
+			result=trimLastChar(result)
+		}
 		return result
 	}else {
-		return name[0]
+		return names[0]
 	}
 }
 
