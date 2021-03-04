@@ -56,11 +56,11 @@
 插入当前系统时间，格式如下，选择对应的序号
 
 - 1   时间格式：yyyy-MM-dd HH:mm:ss
-- 2    yyyy_MM_dd HH_mm_ss
-- 3    yyyy-MM-dd
-- 4    HH-mm-ss
-- 5    yyyy_MM_dd
-- 6    HH_mm_ss
+- 2   时间格式：yyyy_MM_dd HH_mm_ss
+- 3   时间格式：yyyy-MM-dd
+- 4   时间格式：HH-mm-ss
+- 5   时间格式：yyyy_MM_dd
+- 6   时间格式：HH_mm_ss
 
 > 示例：
 >
