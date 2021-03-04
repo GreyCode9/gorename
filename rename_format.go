@@ -49,7 +49,7 @@ func _format(fileName string,incr int64) string {
 			break
 		case "o":
 			if *o {
-				formatName=append(formatName, fileName)
+				formatName=append(formatName, getName(fileName))
 				if *s!="" {
 					formatName=append(formatName, *s)
 				}

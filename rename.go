@@ -78,6 +78,20 @@ func getExtName(fileName string) string{
 	}
 	return ""
 }
+/*
+	获取文件名（不带拓展名）
+*/
+func getName(fileName string) string{
+	name:=strings.Split(fileName,".")
+	if len(name)>=2 {
+		name[len(name)-1]=""
+		result:=strings.Join(name,".")
+		result=trimLastChar(result)
+		return result
+	}else {
+		return name[0]
+	}
+}
 
 /*
 	如果名字冲突，尾部拼接自增数字返回新名字
