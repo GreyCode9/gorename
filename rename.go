@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -39,26 +40,28 @@ func rename()  {
 	files, _ := ioutil.ReadDir(filePath)
 
 	var incr int64
+	confirm()
 	for _, f := range files {
 		fileName:=f.Name()
 		if _h(fileName) {
 			if _fold(fileName) {
 				newName := _format(fileName, incr)
 				ext := getExtName(fileName)
-				//extNewName := newName+ext
-				extNewName := checkName(newName,ext,0)
+				extNewName := checkName(newName,ext,0,true)
 				result[fileName]=extNewName
-				//fmt.Println(incr)
+				err:=os.Rename(filePath+"/"+fileName,filePath+"/"+extNewName)
+				if err!=nil {
+					fmt.Println("重命名失败")
+				}
 				incr++
 			}
 		}
 	}
-	fmt.Printf("处理完成，共处理数量：%d \n",incr)
-	
-	// test
+
 	for k,v := range result {
 		fmt.Printf("%s  ==>  %s \n",k,v)
 	}
+	fmt.Printf("处理完成，共处理数量：%d \n",incr)
 }
 
 /*
@@ -78,12 +81,40 @@ func getExtName(fileName string) string{
 /*
 	如果名字冲突，尾部拼接自增数字返回新名字
 */
-func checkName(fn string,ext string,incr int64) string {
+func checkName(fn string,ext string,incr int64,first bool) string {
 	fp:=filePath+"/"+fn+ext
 	if isExist(fp) {
-		fn=fn+"-"+strconv.FormatInt(incr,10)
+		if first {
+			fn=fn+"-"+strconv.FormatInt(incr,10)
+		}else {
+			fn=trimLastChar(fn)+strconv.FormatInt(incr,10)
+		}
 		incr++
-		checkName(fn,ext,incr)
+		return checkName(fn,ext,incr,false)
+	}else {
+		return fn+ext
 	}
-	return fn
+}
+
+/*
+	确认提示
+*/
+func confirm()  {
+	var c string
+	tips:="你是否要批量重命名该文件下的文件？[y/n]"
+	fmt.Println(tips)
+	_, _ = fmt.Scanln(&c)
+	f:=true
+	for f {
+		switch c {
+		case "y":
+			f=false
+			break;
+		case "n":
+			os.Exit(3)
+		default:
+			fmt.Println(tips)
+			_, _ = fmt.Scanln(&c)
+		}
+	}
 }
