@@ -6,3 +6,5 @@
     <img src="https://img.shields.io/badge/Ubuntu-18.04.2-red?logo=linux&color=FCC624&style=flat"/>
 </div>
 
+![diugai.com161510064921466](http://cdn.mjava.top/blog/diugai.com161510064921466.png)
+
